@@ -1,0 +1,84 @@
+diff -up libcapi-master/bintec.c.1~ libcapi-master/bintec.c
+--- libcapi-master/bintec.c.1~	2017-09-28 12:14:52.000000000 +0200
++++ libcapi-master/bintec.c	2020-07-02 22:15:38.166373898 +0200
+@@ -41,9 +41,8 @@
+ #include <fcntl.h>
+ #include <sys/uio.h>
+ #include <sys/time.h>
+-#include <sys/endian.h>
++#include <bsd/sys/endian.h>
+ #include <sys/ioctl.h>
+-#include <sys/filio.h>
+ #include <sys/socket.h>
+ #include <netinet/in.h>
+ #include <netinet/tcp.h>
+@@ -51,7 +50,8 @@
+ #include <errno.h>
+ #include <err.h>
+ #include <netdb.h>
+-#include <md5.h>
++#include <bsd/md5.h>
++#include <bsd/string.h>
+ 
+ #define CAPI_MAKE_IOCTL
+ 
+diff -up libcapi-master/capi20.h.1~ libcapi-master/capi20.h
+--- libcapi-master/capi20.h.1~	2017-09-28 12:14:52.000000000 +0200
++++ libcapi-master/capi20.h	2020-07-02 22:15:38.166373898 +0200
+@@ -49,7 +49,7 @@
+ #define _CAPI20_H_
+ 
+ #include <sys/cdefs.h>
+-#include <sys/endian.h>
++#include <bsd/sys/endian.h>
+ 
+ #if !defined(_KERNEL)
+ #include <stdint.h>
+diff -up libcapi-master/capiclient.c.1~ libcapi-master/capiclient.c
+--- libcapi-master/capiclient.c.1~	2017-09-28 12:14:52.000000000 +0200
++++ libcapi-master/capiclient.c	2020-07-02 22:16:59.496258344 +0200
+@@ -39,11 +39,9 @@
+ #include <fcntl.h>
+ #include <sys/uio.h>
+ #include <sys/time.h>
+-#include <sys/endian.h>
++#include <bsd/sys/endian.h>
+ #include <sys/ioctl.h>
+-#include <sys/filio.h>
+ #include <sys/socket.h>
+-#include <sys/ioccom.h>
+ #include <netinet/in.h>
+ #include <netinet/tcp.h>
+ #include <poll.h>
+@@ -51,6 +49,12 @@
+ #include <err.h>
+ #include <netdb.h>
+ 
++#ifndef IOCPARM_MASK
++#define IOCPARM_MASK      0x1FFF
++#endif
++#ifndef IOCPARM_LEN
++#define IOCPARM_LEN(a)    (((a) >> 16) & IOCPARM_MASK)
++#endif
+ 
+ #define CAPI_MAKE_IOCTL
+ #include "capi20.h"
+diff -up libcapi-master/capilib.c.1~ libcapi-master/capilib.c
+--- libcapi-master/capilib.c.1~	2017-09-28 12:14:52.000000000 +0200
++++ libcapi-master/capilib.c	2020-07-02 22:15:38.166373898 +0200
+@@ -45,12 +45,13 @@
+ #include <fcntl.h>
+ #include <sys/uio.h>
+ #include <sys/time.h>
+-#include <sys/endian.h>
++#include <bsd/sys/endian.h>
+ #include <sys/ioctl.h>
+-#include <sys/filio.h>
++#include <bsd/sys/poll.h>
+ #include <poll.h>
+ #include <errno.h>
+ #include <err.h>
++#include <bsd/string.h>
+ 
+ #define CAPI_MAKE_IOCTL
+ 
