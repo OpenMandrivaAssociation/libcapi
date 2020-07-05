@@ -9,7 +9,7 @@
 Name:		libcapi
 Summary:	CAPI (ISDN) library
 Version:	2.0.3
-Release:	1
+Release:	2
 Source0:	https://github.com/ISDN4Linux/libcapi/archive/master/%{name}-%{version}.tar.gz
 Patch0:		libcapi-compile.patch
 Group:		System/Libraries
@@ -30,6 +30,8 @@ CAPI (ISDN) library
 Summary: Development files for the CAPI ISDN library
 Group: Development/C++ and C
 Requires: %{mklibname capi20 1}
+# capi headers #include <bsd/sys/endian.h>
+Requires: pkgconfig(libbsd)
 
 %description -n %{devname}
 Development files for the CAPI ISDN library
@@ -47,6 +49,8 @@ Summary: Development files for the CAPI ISDN library (32-bit)
 Group: Development/C++ and C
 Requires: %{devname} = %{EVRD}
 Requires: %{mklib32name capi20 1}
+# capi headers #include <bsd/sys/endian.h>
+Requires: devel(libbsd)
 
 %description -n %{dev32name}
 Development files for the CAPI ISDN library
