@@ -9,7 +9,7 @@
 Name:		libcapi
 Summary:	CAPI (ISDN) library
 Version:	2.0.3
-Release:	2
+Release:	3
 Source0:	https://github.com/ISDN4Linux/libcapi/archive/master/%{name}-%{version}.tar.gz
 Patch0:		libcapi-compile.patch
 Group:		System/Libraries
