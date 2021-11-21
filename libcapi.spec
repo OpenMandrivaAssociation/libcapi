@@ -15,9 +15,11 @@ Summary:	CAPI (ISDN) library
 Version:	3.27
 Release:	1
 Source0:	https://github.com/leggewie-DM/libcapi20/archive/refs/heads/master.tar.gz
+Patch0:		libcapi20-autoconf.patch
 Group:		System/Libraries
 License:	MIT
 BuildRequires:	make
+BuildRequires:	autoconf automake libtool
 %if %{with compat32}
 BuildRequires:	devel(libunwind)
 %endif
@@ -81,6 +83,12 @@ ISDN CAPI library
 
 %prep
 %autosetup -p1 -n libcapi20-master
+cp -f %{_datadir}/libtool/config/* .
+libtoolize --force
+aclocal
+automake -a
+autoconf
+
 export CPPFLAGS=-I$(pwd)
 CONFIGURE_TOP=$(pwd)
 
