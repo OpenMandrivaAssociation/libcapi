@@ -13,7 +13,7 @@
 Name:		libcapi
 Summary:	CAPI (ISDN) library
 Version:	3.27
-Release:	1
+Release:	2
 Source0:	https://github.com/leggewie-DM/libcapi20/archive/refs/heads/master.tar.gz
 Patch0:		libcapi20-autoconf.patch
 Group:		System/Libraries
