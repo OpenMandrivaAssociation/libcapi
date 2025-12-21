@@ -18,6 +18,8 @@ Source0:	https://github.com/leggewie-DM/libcapi20/archive/refs/heads/master.tar.
 Patch0:		libcapi20-autoconf.patch
 Group:		System/Libraries
 License:	MIT
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires:	make
 BuildRequires:	autoconf automake libtool
 %if %{with compat32}
